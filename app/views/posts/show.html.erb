@@ -1,0 +1,129 @@
+
+
+<% @page_title = @post.title %>
+
+<style>
+.show_contain{
+  background-image: url(<%= @post.image.url(:large)%>);
+}
+
+  .show_contain:after{
+    content: "";
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    opacity: 0.65;
+      background-color: <%= @post.color %>; 
+   background-image: linear-gradient(to top,rgba(0,0,0,0.5) 0,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%);
+  }
+	.post_show{
+		background-color: <%= @post.color %>;
+    background-size: cover;
+    background-position: center;
+	}
+
+  .post_show::after{
+  content: "";
+      opacity: 0.95;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      position: absolute;
+      z-index: 10;  
+        -webkit-filter: brightness(0.5);
+
+}
+</style>
+
+
+
+
+
+<div class="side_right_post_show">
+  <div class="show_contain">
+    <div class="show_contain_main">
+         <h1 class ="show_title"><%= @post.title %> </h1>
+
+    <h4 class ="show_title"><%= truncate @post.summary, length: 175 %> </h4>
+
+<h4 class ="show_title_category">Category: <%= @post.category.name %></h4>
+
+<div class="social_section">
+  <%= social_share_button_tag(@post.title) %>
+</div>
+
+<div class="date_author">
+      <span><h5><%= @post.created_at.strftime("%B %d, %Y") %></h5></span>
+     <span><h5> By: <%= @post.author %></h5></span> 
+
+</div>
+    </div>
+ 
+  </div>
+
+
+<div class="next_prev">
+  <% if @post.id == 1 %>
+    <div class ="change exit"><%= link_to("✕", {:controller => 'posts', :action => 'index'}) %> </div>
+  <% else %>
+    <div class ="change backward"><%= link_to "<", @post.previous %> </div>
+
+
+      <% end %>
+      <div class="change forward"><%= link_to ">", @post.next %></div>
+
+</div>
+
+
+
+
+
+<main class="main_content">
+	<p><%= @post.content %></p>
+
+
+
+<div class="comments">
+
+  <h2>Comments</h2>
+
+  <% @post.comments.each do |comment| %>
+    <div class="comment_display">
+    <li> -> <%= comment.name%> 
+      <br>
+    <%= comment.created_at.strftime("%B %d, %Y")%> 
+    <br>
+     <%= comment.body %> </li>
+    </div>
+  <% end %>
+
+
+<div class="show_form">
+  
+<%= form_for([@post, @post.comments.build ]) do |f| %>
+
+<div> <%= f.text_field :name, placeholder: "Name" %> </div>
+
+<div> <%= f.text_area :body, rows: 5, cols: 30, :placeholder => "Comment", :class => 'textarea'%> </div>
+
+ <%= f.submit 'Post Comment', :class => "buttoner" %> 
+
+<% end %> 
+</div>
+
+</div>
+</main>
+
+
+
+
+
+
+
+	</div>
+
+
+

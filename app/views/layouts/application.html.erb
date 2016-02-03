@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>	
+  <title>I'm Haaruun | <%= @page_title || "Hey!" %></title>
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+   <%= favicon_link_tag 'favicon.ico' %>
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+</head>
+<body>
+
+<div class="open_close">
+		<a id="nav-toggle" href="#"><span></span></a>
+
+</div>
+	<div class="menu in">
+		
+			<article class="circle">
+				<%= image_tag 'Badge_2.png' %>
+
+
+				
+			</article>
+		
+		<p>I enjoy shooting and editing video, developing and designing websites, and writing to engage and inform.</p>
+		<div><span><i class="fa fa-home"></i></span><%= link_to("Home", {:controller => 'home', :action => 'index'}) %></div>
+		<div><span><i class="fa fa-book"></i>
+</span><%= link_to("Blog", {:controller => 'posts', :action => 'index'}) %> </div>
+		<div><span><i class="fa fa-envelope-o"></i>
+</span><%= link_to("Contact", {:controller => 'messages', :action => 'new'}) %> </div>
+<p class="copy">© 2016 Haaruun Dhubat</p>
+	</div>
+
+<div class="wrapper">
+	<%= yield %>
+
+</div>
+
+</body>
+</html>
